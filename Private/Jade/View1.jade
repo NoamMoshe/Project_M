@@ -1,0 +1,28 @@
+doctype html
+html
+
+head
+	//- Meta
+	meta(charset="utf-8" content="html")
+	meta(http-equiv='X-UA-Compatible', content='IE=edge')
+	meta(name='viewport', content='width=device-width, initial-scale=1')
+
+	//- Page title
+	title= "Demo"
+	
+	//- Links (CSS styles)
+	link(rel='stylesheet', href='/Styles/bootstrap.min.css')
+	link(rel='stylesheet', href='/Styles/editpasswordcss.css')
+	
+	//- jquery
+	script(type="text/javascript", src="/Scripts/jquery.min.js" )
+	script(type="text/javascript", src="/Scripts/jquery-ui.js" )
+	
+	//- Scripts
+	script(type="text/javascript", src="/Scripts/Test.js" )
+	
+body(class="container")
+	block content
+			//- Apply button
+			div(class="row")
+				button( value="Start logic" onclick='StartLogic()' class="btn btn-lg btn-primary btn-block")
