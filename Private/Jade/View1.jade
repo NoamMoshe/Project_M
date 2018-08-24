@@ -13,16 +13,22 @@ head
 	//- Links (CSS styles)
 	link(rel='stylesheet', href='/Styles/bootstrap.min.css')
 	link(rel='stylesheet', href='/Styles/editpasswordcss.css')
-	
-	//- jquery
+	link(rel='stylesheet', href='/Styles/spin.css')
+
+	//- Scripts
 	script(type="text/javascript", src="/Scripts/jquery.min.js" )
 	script(type="text/javascript", src="/Scripts/jquery-ui.js" )
-	
-	//- Scripts
 	script(type="text/javascript", src="/Scripts/Test.js" )
-	
+	script(type="text/javascript", src="/Scripts/ConstsAndDefinitions.js" )
+	script(type="text/javascript", src="/Scripts/Models.js" )
+	script(type="text/javascript", src="/Scripts/ViewModels.js" )
+
 body(class="container")
 	block content
-			//- Apply button
 			div(class="row")
-				button( value="Start logic" onclick='StartLogic()' class="btn btn-lg btn-primary btn-block")
+				//- Apply button
+				button( value="Start logic" onclick='StartLogic()' style="color:white; background: blue; width: 100px; height: 100px;") Click me!
+				//- Analyze results view
+				div( class="AnalyzeResultsDiv"      style="background: #7FFFD4; width: 700px; height: 500px; margin: auto;")
+					div( id="FinancialInsightsView" style="background: red; width: 90%; height: 40%; top:5px; position: relative; margin-left: auto; margin-right: auto;")				
+					div( id="TamhilDiv"             style="background: yellow; width: 90%; height: 40%; top:5px; position: relative; margin-left: auto; margin-right: auto;")
