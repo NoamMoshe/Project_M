@@ -2,6 +2,8 @@
 /**** Logic ****/
  
 var marketStateManager;
+var mortgageTamhilModel;
+var mortgageTamhilVM;
 
 
 $(document).ready(function()
@@ -20,12 +22,14 @@ function StartLogic()
     console.log('Client DEBUG:: StartLogic FIRED');
 
     //UI test
-    var mortgageTamhilVM = new MortgageTamhilVM(marketStateManager);
-    mortgageTamhilVM.setDummyValuesDEBUG();
-    
+    mortgageTamhilModel = new MortgageTamhilModel();
+    mortgageTamhilModel.LoanTakersInfo.setDummyValuesDEBUG();
+    mortgageTamhilModel.MortgageLanesInfo.setDummyValuesDEBUG();
+
     //Genrate a Tamhil
 
     //Preset results to user
+    mortgageTamhilVM = new MortgageTamhilVM(marketStateManager,mortgageTamhilModel);
     mortgageTamhilVM.RefreshUI();
 }
 

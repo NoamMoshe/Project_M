@@ -4,21 +4,13 @@
 // *********************************************** MortgageTamhilModel class
 // This entity represent
 
-function MortgageTamhilVM (_marketStateMgr){
-    this.Model = new MortgageTamhilModel();
+function MortgageTamhilVM (_marketStateMgr, _mortgageTamhilModel){
+    this.Model = JSON.parse(JSON.stringify(_marketStateMgr)); //Hard copy of model
     this.MarketStateMgr = JSON.parse(JSON.stringify(_marketStateMgr)); //Hard copy of model object
 }
 
 MortgageTamhilVM.prototype.RefreshUI = function(){
     console.log('Client DEBUG::MortgageTamhilVM::RefreshUI START');
-};
-
-MortgageTamhilVM.prototype.setDummyValuesDEBUG = function(){
-    this.Model.LoanTakersInfo.setDummyValuesDEBUG();
-
-    this.Model.MortgageLanes.push(new MortgageLaneModel("פריים"));
-    this.Model.MortgageLanes.push(new MortgageLaneModel("קבועה צמודה"));
-    this.Model.MortgageLanes.push(new MortgageLaneModel("משתנה כל 5"));
 };
 
 

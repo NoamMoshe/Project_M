@@ -1,11 +1,25 @@
 // ******************************************************************************************
 // ***** View classes
 
-// *********************************************** MortgageLaneModel class
+// *********************************************** MortgageLaneUniqueData class
 // This entity represent 
 
-function MortgageLaneModel(_name) { 
-    this.Name = _name;                       //STRING, name of lane
+function MortgageLaneUniqueData(_name, _saving, _risk, _flexibility,_negativeList,_positiveList ) { 
+
+    this.Name = _name;                                 //STRING, name of lane
+    this.Saving = _saving;                             //INT
+    this.Risk = _risk;                                 //INT
+    this.Flexibility = _flexibility;                   //INT
+    this.Negative = _negativeList;                     //List of string  
+    this.Positive = _positiveList;                     //List of string      
+}
+
+
+// *********************************************** MortgageLane class
+// This entity represent 
+
+function MortgageLane(_mortgageLaneUniqueData) { 
+    
     this.Sum = 100000;                    //UINT, in NIS, sum of money loaned from the bank in this lane
     this.Duration = 10,                   //UINT, in Years, the duration of the loan in this lane
     this.InterestTopLimit = 4.0;          //FLOOT, in percentage,
@@ -14,16 +28,32 @@ function MortgageLaneModel(_name) {
     this.InitialMonthlyPayment = 4000;    //UINT, in NIS
     this.AverageMonthlyPayment = 4000;    //UINT, in NIS 
     this.WorstCaseMonthlyPayment = 4000;  //UINT, in NIS 
+
+    this.MortgageLaneUniqueData = _mortgageLaneUniqueData;     //Obj
+};
+
+
+// *********************************************** MortgageLanesInfoModel class
+// This entity represent 
+
+function MortgageLanesInfoModel(_name) { 
     
-    this.Rank  = {
-        'Saving': 0,                                      //INT
-        'Risk': 0,                                        //INT
-        'Flexibility': 0,                                 //INT
-        'Negative': [],                                   //INT  
-        'Positive': [],                                   //INT       
-    };
+    this.MortgageLaneList = [];
 };
  
+MortgageLanesInfoModel.prototype.setDummyValuesDEBUG = function(){
+
+    var uniqueData;
+    
+    uniqueData = new MortgageLaneUniqueData("פריים",3,5,5,[],[]);
+    var prime = new MortgageLane(uniqueData);
+
+    uniqueData = new MortgageLaneUniqueData("קבועה צמודה",3,3,1,[],[]);
+    var KvoaZmoda = new MortgageLane(uniqueData);
+
+    uniqueData = new MortgageLaneUniqueData("משתנה כל 5 לא צמודה",3,2,3,[],[]);  
+    var MistanaKol5LoZmoda = new MortgageLane(uniqueData);
+}
 
 // *********************************************** LoanTakersInfoModel class
 // This entity represent 
@@ -81,12 +111,12 @@ LoanTakersInfoModel.prototype.setDummyValuesDEBUG = function(){
 
 
 // *********************************************** MortgageTamhilModel class
-// This entity represent 
+// This entity represent all the data & Meta data about the loan
 
 function MortgageTamhilModel() {
-    this.MortgageLanes = []; 
     this.FinancialInsights = { 'NegativeList' : [], 'PositiveList' : [], 'AttentionList': [] };
 
     this.LoanTakersInfo = new LoanTakersInfoModel();
+    this.MortgageLanesInfo = new MortgageLanesInfoModel(); 
 }
 
