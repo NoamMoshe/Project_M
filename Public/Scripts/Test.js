@@ -1,33 +1,32 @@
 /*******************************************************/
 /**** Logic ****/
  
+var marketStateManager;
+
+
 $(document).ready(function()
 { 
     console.log('Client DEBUG:: Page loaded START');
 
-    //Get current market data from server
-
-
+    //TODO - Get current market data from server and analyze it
+    marketStateManager = new MarketStateManager();
+    marketStateManager.Analyze();
 
 }); 
 
  
 function StartLogic() 
 { 
-    console.log('Client DEBUG:: showSubmit START');
-
-    
+    console.log('Client DEBUG:: StartLogic FIRED');
 
     //UI test
-    var loanTakersInfo = new LoanTakersInfoModel();
-    loanTakersInfo.setDummyValuesDEBUG();           //At this point we assume that we have all of the data.
+    var mortgageTamhilVM = new MortgageTamhilVM(marketStateManager);
+    mortgageTamhilVM.setDummyValuesDEBUG();
     
     //Genrate a Tamhil
 
     //Preset results to user
-    var mortgageTamhilVM = new MortgageTamhilVM(loanTakersInfo);
     mortgageTamhilVM.RefreshUI();
-
 }
 
 

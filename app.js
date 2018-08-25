@@ -1,7 +1,7 @@
 /*******************************************************/
 /**** Variables ****/
 
-var PATH_TO_NODE_MODULES = (process.platform == 'win32') ? "C:/Windows/System32/node_modules/" : "";
+const PATH_TO_NODE_MODULES = (process.platform == 'win32') ? "C:/Windows/System32/node_modules/" : "";
 
 
 /**** Modules ****/

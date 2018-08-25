@@ -3,8 +3,9 @@
 
 // *********************************************** MortgageLaneModel class
 // This entity represent 
-function MortgageLaneModel() { 
-    this.Name = "";                       //STRING, name of lane
+
+function MortgageLaneModel(_name) { 
+    this.Name = _name;                       //STRING, name of lane
     this.Sum = 100000;                    //UINT, in NIS, sum of money loaned from the bank in this lane
     this.Duration = 10,                   //UINT, in Years, the duration of the loan in this lane
     this.InterestTopLimit = 4.0;          //FLOOT, in percentage,
@@ -14,13 +15,19 @@ function MortgageLaneModel() {
     this.AverageMonthlyPayment = 4000;    //UINT, in NIS 
     this.WorstCaseMonthlyPayment = 4000;  //UINT, in NIS 
     
-    //TODO - lane info, positive, negtive, grade, etc
+    this.Rank  = {
+        'Saving': 0,                                      //INT
+        'Risk': 0,                                        //INT
+        'Flexibility': 0,                                 //INT
+        'Negative': [],                                   //INT  
+        'Positive': [],                                   //INT       
+    };
 };
  
 
-
 // *********************************************** LoanTakersInfoModel class
 // This entity represent 
+
 function LoanTakersInfoModel() { 
 
     this.PersonalInfo  = {
@@ -72,11 +79,14 @@ LoanTakersInfoModel.prototype.setDummyValuesDEBUG = function(){
     this.LoanInfo.MonthlySavings = 3000;
 };
 
+
 // *********************************************** MortgageTamhilModel class
 // This entity represent 
+
 function MortgageTamhilModel() {
-    this.MortgageLanes = {}; 
+    this.MortgageLanes = []; 
     this.FinancialInsights = { 'NegativeList' : [], 'PositiveList' : [], 'AttentionList': [] };
 
     this.LoanTakersInfo = new LoanTakersInfoModel();
 }
+
