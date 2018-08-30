@@ -15,7 +15,7 @@ var Enums = {
     },
 }
 
-const Consts = Object.freeze( {
+const CONSTS = Object.freeze( {
     'LOANS' : {
          'LONETAKER_NO_AOUNT' : 0,
          'NO_FANILY' : 0,
@@ -52,22 +52,20 @@ const Consts = Object.freeze( {
     },
 })
 
-const FinancialInsights = Object.freeze( {
-    'Negative' : {
+const FINANCIAL_INSIGHTS = Object.freeze( {
+    'NEGATIVE' : {
         'LOW_MONTHLY_RETURN': 'ההחזר החודשי קטן יחסית ליכולת הכלכלית', 
         'HIGH_MONTHLY_RETURN': 'ההחזר החודשי גדול יחסית ליכולת הכלכלית',     
         'LOW_SAVINGS_PERCENTAGE': 'אחוז חיסכון נמוך מדי',        
         'LOWֹֹֹ_SAVINGS_DURINGֹֹֹ_MORTGAGE': 'החיסכון נמוך מדי במהלך ההלוואה',     
     },
-    'Positive' : {
+    'POSITIVE' : {
         'HIGH_SAVINGS_PERCENTAGE': 'אחוז חיסכון גבוה',    
         'HIGH_SAVINGS_DURINGֹֹֹ_MORTGAGE': 'חיסכון גבוה במהלך ההלוואה',          
         'RAINY_DAY_FUNDC': 'קרן ליום גשום',                
     },
-    'Attention' : {
+    'ATTENTION' : {
         'FINANCE_STEP_CLOSENESS': 'בעוד סכום לא גבוה את עובר למדרגת מימון טובה יותר',    
     },
-
-
-    
 })
+

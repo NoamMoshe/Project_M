@@ -23,8 +23,7 @@ function StartLogic()
 
     //UI test
     mortgageTamhilModel = new MortgageTamhilModel();
-    mortgageTamhilModel.LoanTakersInfo.setDummyValuesDEBUG();
-    mortgageTamhilModel.MortgageLanesInfo.setDummyValuesDEBUG();
+    mortgageTamhilModel.setDummyValuesDEBUG();
 
     //Genrate a Tamhil
 

@@ -5,12 +5,30 @@
 // This entity represent
 
 function MortgageTamhilVM (_marketStateMgr, _mortgageTamhilModel){
-    this.Model = JSON.parse(JSON.stringify(_marketStateMgr)); //Hard copy of model
+    this.Model = JSON.parse(JSON.stringify(_mortgageTamhilModel)); //Hard copy of model
     this.MarketStateMgr = JSON.parse(JSON.stringify(_marketStateMgr)); //Hard copy of model object
 }
 
 MortgageTamhilVM.prototype.RefreshUI = function(){
     console.log('Client DEBUG::MortgageTamhilVM::RefreshUI START');
+
+    console.log('Client DEBUG::MortgageTamhilVM::    RefreshUI financial insights'); 
+    this.generateFinancialInsightsUI();
+
+
+    console.log('Client DEBUG::MortgageTamhilVM::    RefreshUI mortgage lanes'); 
+};
+
+MortgageTamhilVM.prototype.generateFinancialInsightsUI = function(){
+    
+    //Add table headline
+    var content = "<ul>"
+    for(i=0 ; i < this.Model.FinancialInsights.PositiveList.length ; ++i)
+    {
+        content += '<li type="square" style="width: 50px; " >' + this.Model.FinancialInsights.PositiveList[i] + '</li>';
+    }
+    content += "</ul>"
+    $('#FinancialInsightsView').append(content);   
 };
 
 

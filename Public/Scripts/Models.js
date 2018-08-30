@@ -65,27 +65,27 @@ function LoanTakersInfoModel() {
         'LastName': '',                                        //STRING
         'EmailAddress': 'example@.me',                         //STRING
         'CurrCity': 'תל אביב',                                //STRING
-        'NumOfCurrFamilyMembers': Consts.LOANS.NO_FAMILY,      //INT, 
-        'NumOfExpectedFamilyMembers': Consts.LOANS.NO_FAMILY,  //INT,
+        'NumOfCurrFamilyMembers': CONSTS.LOANS.NO_FAMILY,      //INT, 
+        'NumOfExpectedFamilyMembers': CONSTS.LOANS.NO_FAMILY,  //INT,
     };
 
     this.LoanInfo = {
         'LoanTaker': Enums.LoanTakers.ERR,                     //Enum
-        'LoanTaker1Age': Consts.LOANS.LONETAKER_NO_AGE,        //INT, 
-        'LoanTaker2Age': Consts.LOANS.LONETAKER_NO_AGE,        //INT, 
-        'MonthlyPayment': Consts.MONTHLYPAYMENT.MP_EMPTY,      //INT,
-        'MortgageSum': Consts.MORTGAGESUM.MS_EMPTY,            //INT,
-        'RealEstatePrice': Consts.REALESTATE.RE_EMPTY,         //INT,
-        'RealEstateSqureFoot':Consts.REALESTATE.RE_EMPTY,      //INT,
-        'RealEstateRooms':Consts.REALESTATE.RE_EMPTY,          //INT,
-        'LoanTaker1Income': Consts.LOANS.LONETAKER_NO_AOUNT,   //INT, in NIS, income netto 
-        'LoanTaker2Income': Consts.LOANS.LONETAKER_NO_AOUNT,   //INT, in NIS, income netto 
-        'FixedExpenditure': Consts.LOANS.LONETAKER_NO_AOUNT,   //INT, in NIS, Regurly amount of money payed
+        'LoanTaker1Age': CONSTS.LOANS.LONETAKER_NO_AGE,        //INT, 
+        'LoanTaker2Age': CONSTS.LOANS.LONETAKER_NO_AGE,        //INT, 
+        'MonthlyPayment': CONSTS.MONTHLYPAYMENT.MP_EMPTY,      //INT,
+        'MortgageSum': CONSTS.MORTGAGESUM.MS_EMPTY,            //INT,
+        'RealEstatePrice': CONSTS.REALESTATE.RE_EMPTY,         //INT,
+        'RealEstateSqureFoot':CONSTS.REALESTATE.RE_EMPTY,      //INT,
+        'RealEstateRooms':CONSTS.REALESTATE.RE_EMPTY,          //INT,
+        'LoanTaker1Income': CONSTS.LOANS.LONETAKER_NO_AOUNT,   //INT, in NIS, income netto 
+        'LoanTaker2Income': CONSTS.LOANS.LONETAKER_NO_AOUNT,   //INT, in NIS, income netto 
+        'FixedExpenditure': CONSTS.LOANS.LONETAKER_NO_AOUNT,   //INT, in NIS, Regurly amount of money payed
         'LoanTakerFinancingGroup': Enums.FinancingGroup.ERR,   //Enum
-        'CurrRent': Consts.LOANS.LONETAKER_NO_AOUNT,           //INT, in NIS,
-        'Capital': Consts.LOANS.LONETAKER_NO_AOUNT,            //INT, in NIS,
-        'MonthlySavings': Consts.LOANS.LONETAKER_NO_AOUNT,     //INT, in NIS,
-        'OutOfTheBlueIncome': Consts.LOANS.LONETAKER_NO_AOUNT, //INT, in NIS,
+        'CurrRent': CONSTS.LOANS.LONETAKER_NO_AOUNT,           //INT, in NIS,
+        'Capital': CONSTS.LOANS.LONETAKER_NO_AOUNT,            //INT, in NIS,
+        'MonthlySavings': CONSTS.LOANS.LONETAKER_NO_AOUNT,     //INT, in NIS,
+        'OutOfTheBlueIncome': CONSTS.LOANS.LONETAKER_NO_AOUNT, //INT, in NIS,
     };
 }
 
@@ -119,4 +119,20 @@ function MortgageTamhilModel() {
     this.LoanTakersInfo = new LoanTakersInfoModel();
     this.MortgageLanesInfo = new MortgageLanesInfoModel(); 
 }
+
+MortgageTamhilModel.prototype.setDummyValuesDEBUG = function(){
+
+    this.FinancialInsights.NegativeList.push(FINANCIAL_INSIGHTS.NEGATIVE.LOW_MONTHLY_RETURN);
+    this.FinancialInsights.NegativeList.push(FINANCIAL_INSIGHTS.NEGATIVE.HIGH_MONTHLY_RETURN);   
+    this.FinancialInsights.NegativeList.push(FINANCIAL_INSIGHTS.NEGATIVE.LOW_SAVINGS_PERCENTAGE);
+
+    this.FinancialInsights.PositiveList.push(FINANCIAL_INSIGHTS.POSITIVE.HIGH_SAVINGS_PERCENTAGE);
+    this.FinancialInsights.PositiveList.push(FINANCIAL_INSIGHTS.POSITIVE.HIGH_SAVINGS_DURINGֹֹֹ_MORTGAGE);   
+    this.FinancialInsights.PositiveList.push(FINANCIAL_INSIGHTS.POSITIVE.RAINY_DAY_FUNDC);
+
+    this.FinancialInsights.AttentionList.push(FINANCIAL_INSIGHTS.ATTENTION.FINANCE_STEP_CLOSENESS);
+
+    this.LoanTakersInfo.setDummyValuesDEBUG();
+    this.MortgageLanesInfo.setDummyValuesDEBUG();
+};
 
