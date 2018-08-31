@@ -67,5 +67,10 @@ const FINANCIAL_INSIGHTS = Object.freeze( {
     'ATTENTION' : {
         'FINANCE_STEP_CLOSENESS': 'בעוד סכום לא גבוה את עובר למדרגת מימון טובה יותר',    
     },
+    'HEADLINES' : {
+        'NEGATIVE': 'תובנות שליליות',  
+        'POSITIVE': 'תובנות חיוביות',  
+        'ATTENTION': 'לתשומת לבך',    
+    },
 })
 

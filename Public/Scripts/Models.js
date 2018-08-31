@@ -41,6 +41,9 @@ function MortgageLanesInfoModel(_name) {
     this.MortgageLaneList = [];
 };
  
+//
+// Insert dummy values to MortgageLanesInfoModel object
+//
 MortgageLanesInfoModel.prototype.setDummyValuesDEBUG = function(){
 
     var uniqueData;
@@ -89,6 +92,9 @@ function LoanTakersInfoModel() {
     };
 }
 
+//
+// Insert dummy values to LoanTakersInfoModel object
+//
 LoanTakersInfoModel.prototype.setDummyValuesDEBUG = function(){
     this.PersonalInfo.FirstName = "ישראל";
     this.PersonalInfo.LastName = "ישראלי";
@@ -120,9 +126,13 @@ function MortgageTamhilModel() {
     this.MortgageLanesInfo = new MortgageLanesInfoModel(); 
 }
 
+//
+// Insert dummy values to MortgageTamhilModel object
+//
 MortgageTamhilModel.prototype.setDummyValuesDEBUG = function(){
 
-    this.FinancialInsights.NegativeList.push(FINANCIAL_INSIGHTS.NEGATIVE.LOW_MONTHLY_RETURN);
+    var personalNote = "בלה בלה בלה";
+    this.FinancialInsights.NegativeList.push(FINANCIAL_INSIGHTS.NEGATIVE.LOW_MONTHLY_RETURN + "; " + personalNote);
     this.FinancialInsights.NegativeList.push(FINANCIAL_INSIGHTS.NEGATIVE.HIGH_MONTHLY_RETURN);   
     this.FinancialInsights.NegativeList.push(FINANCIAL_INSIGHTS.NEGATIVE.LOW_SAVINGS_PERCENTAGE);
 
