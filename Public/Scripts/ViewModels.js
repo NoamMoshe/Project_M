@@ -1,6 +1,15 @@
 // *********************************************
 // *****  View Models classes
 
+Array.prototype.sum = function (prop) {
+    var total = 0
+    for ( var i = 0, _len = this.length; i < _len; i++ ) {
+        total += this[i][prop]
+    }
+    return total
+}
+
+
 // *********************************************** MortgageTamhilModel class
 // This entity represent
 
@@ -12,8 +21,9 @@ function MortgageTamhilVM (_marketStateMgr, _mortgageTamhilModel){
 MortgageTamhilVM.prototype.RefreshUI = function(){
     console.log('Client DEBUG::MortgageTamhilVM::RefreshUI START');
 
-    this.generateHeadLineViewsUI();
-    this.generateFinancialInsightsUI();
+    //this.generateHeadLineViewsUI();
+    //this.generateFinancialInsightsUI();
+    this.generateMortgageTamhilUI();
 
     console.log('Client DEBUG::MortgageTamhilVM::    RefreshUI mortgage lanes'); 
 };
@@ -45,6 +55,57 @@ MortgageTamhilVM.prototype.generateFinancialInsightsUI = function(){
     this.generateDynamicList(FINANCIAL_INSIGHTS.HEADLINES.POSITIVE, this.Model.FinancialInsights.PositiveList, parnetDiv, "Positive");
     this.generateDynamicList(FINANCIAL_INSIGHTS.HEADLINES.NEGATIVE, this.Model.FinancialInsights.NegativeList, parnetDiv, "Negative");
     this.generateDynamicList(FINANCIAL_INSIGHTS.HEADLINES.ATTENTION, this.Model.FinancialInsights.AttentionList, parnetDiv, "Attention");
+};
+
+MortgageTamhilVM.prototype.generateMortgageTamhilUI = function(){
+    
+    var parnetDiv = '#MortgageTamhilView';
+    var headLine = 'תמהיל משכנתא';
+    var addedHeightToDivParnet = 400; //For headline 
+    var content = "<h4 dir='RTL' style='margin-right:10px;'>" + headLine + "</h4>"
+
+    //Add table
+    content += "<table style='margin-right:10px;'>"
+    
+    //Add headline
+    content += "<tr>";
+    content += "<th style='width:110px; text-align:right;' >"  + TEXTS.TAMHIL.LINE + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.INTERESTS + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.SUM + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.YEARS + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.SUMֹֹ_TO_RETURN + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.MONTHLY_RETURN + "</th>";
+    content += "</tr>";
+    
+    //Add table line
+    var mortgageLaneList = this.Model.MortgageLanesInfo.MortgageLaneList;
+    for(i=0 ; i<mortgageLaneList.length ; ++i)
+    {
+        content += "<tr>"
+        content += "<td style='width: 100px; text-align:right;'>"  + mortgageLaneList[i].MortgageLaneUniqueData.Name + "</td>";
+        content += "<td style='width: 60px;  text-align:center;'>" + mortgageLaneList[i].MortgageLaneUniqueData.InterestTopLimit + "</td>";
+        content += "<td style='width: 80px;  text-align:center;'>" + mortgageLaneList[i].Sum + "</td>";
+        content += "<td style='width: 80px;  text-align:center;'>" + mortgageLaneList[i].Duration + "</td>";
+        content += "<td style='width: 80px;  text-align:center;'>" + mortgageLaneList[i].TotalSumToReturn + "</td>";
+        content += "<td style='width: 80px;  text-align:center;'>" + mortgageLaneList[i].MonthlyPayment + "</td>";
+        content += "</tr>";
+    }
+    content += "</table>"
+
+    //Add table summary
+    content += "<table style='margin-right:10px;'>"
+    content += "<tr>";
+    content += "<th style='width:110px; text-align:right;' ></th>";
+    content += "<th style='width:110px; text-align:center;' ></th>";
+    content += "<th style='width:110px; text-align:center;' >" + mortgageLaneList.sum("Sum") + "</th>";
+    content += "<th style='width:110px; text-align:center;' ></th>";
+    content += "<th style='width:110px; text-align:center;' >" + mortgageLaneList.sum("TotalSumToReturn") + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + mortgageLaneList.sum("MonthlyPayment") + "</th>";
+    content += "</tr>";
+    content += "</table>"
+
+    $(parnetDiv).append(content); 
+    $(parnetDiv).height($(parnetDiv).height() + addedHeightToDivParnet); 
 };
 
 MortgageTamhilVM.prototype.generateDynamicList = function(_headLine, _list, _parentDiv, _bulletStyle){

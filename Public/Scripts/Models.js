@@ -25,8 +25,7 @@ function MortgageLane(_mortgageLaneUniqueData) {
     this.InterestTopLimit = 4.0;          //FLOOT, in percentage,
     this.InterestBottomLimit = 1.0;       //FLOOT, in percentage
     this.TotalSumToReturn = 150000;       //UINT, in NIS, total sum of money returned the bank in this lane
-    this.InitialMonthlyPayment = 4000;    //UINT, in NIS
-    this.AverageMonthlyPayment = 4000;    //UINT, in NIS 
+    this.MonthlyPayment = 4000;           //UINT, in NIS
     this.WorstCaseMonthlyPayment = 4000;  //UINT, in NIS 
 
     this.MortgageLaneUniqueData = _mortgageLaneUniqueData;     //Obj
@@ -50,12 +49,15 @@ MortgageLanesInfoModel.prototype.setDummyValuesDEBUG = function(){
     
     uniqueData = new MortgageLaneUniqueData("פריים",3,5,5,[],[]);
     var prime = new MortgageLane(uniqueData);
+    this.MortgageLaneList.push(prime);
 
     uniqueData = new MortgageLaneUniqueData("קבועה צמודה",3,3,1,[],[]);
     var KvoaZmoda = new MortgageLane(uniqueData);
+    this.MortgageLaneList.push(KvoaZmoda);
 
-    uniqueData = new MortgageLaneUniqueData("משתנה כל 5 לא צמודה",3,2,3,[],[]);  
+    uniqueData = new MortgageLaneUniqueData("משתנה צמודה כל 5",3,2,3,[],[]);  
     var MistanaKol5LoZmoda = new MortgageLane(uniqueData);
+    this.MortgageLaneList.push(MistanaKol5LoZmoda);
 }
 
 // *********************************************** LoanTakersInfoModel class

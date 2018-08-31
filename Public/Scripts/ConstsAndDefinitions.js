@@ -52,6 +52,17 @@ const CONSTS = Object.freeze( {
     },
 })
 
+const TEXTS = Object.freeze( {
+    'TAMHIL' : {
+        'LINE': 'מסלול', 
+        'INTERESTS': 'ריביות', 
+        'SUM': 'סכום',     
+        'YEARS': 'שנים',        
+        'SUMֹֹ_TO_RETURN': 'סך החזר',
+        'MONTHLY_RETURN': 'החזר חודשי',          
+    },
+})
+
 const FINANCIAL_INSIGHTS = Object.freeze( {
     'NEGATIVE' : {
         'LOW_MONTHLY_RETURN': 'ההחזר החודשי קטן יחסית ליכולת הכלכלית', 
