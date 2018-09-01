@@ -9,6 +9,17 @@ Array.prototype.sum = function (prop) {
     return total
 }
 
+function FormatSum(nStr) {
+    nStr += '';
+    var x = nStr.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2 + " ₪";
+}
 
 // *********************************************** MortgageTamhilModel class
 // This entity represent
@@ -68,7 +79,7 @@ MortgageTamhilVM.prototype.generateMortgageTamhilUI = function(){
     content += "<table style='margin-right:10px;'>"
     
     //Add headline
-    content += "<tr>";
+    content += "<tr style='border-bottom: 2px solid black'>";
     content += "<th style='width:110px; text-align:right;' >"  + TEXTS.TAMHIL.LINE + "</th>";
     content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.INTERESTS + "</th>";
     content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.SUM + "</th>";
@@ -81,28 +92,33 @@ MortgageTamhilVM.prototype.generateMortgageTamhilUI = function(){
     var mortgageLaneList = this.Model.MortgageLanesInfo.MortgageLaneList;
     for(i=0 ; i<mortgageLaneList.length ; ++i)
     {
-        content += "<tr>"
+        content += "<tr style='border-top: 1px solid black'>"
         content += "<td style='width: 100px; text-align:right;'>"  + mortgageLaneList[i].MortgageLaneUniqueData.Name + "</td>";
-        content += "<td style='width: 60px;  text-align:center;'>" + mortgageLaneList[i].MortgageLaneUniqueData.InterestTopLimit + "</td>";
-        content += "<td style='width: 80px;  text-align:center;'>" + mortgageLaneList[i].Sum + "</td>";
+        content += "<td style='width: 60px;  text-align:center;'>" + mortgageLaneList[i].InterestTopLimit + "% - " + mortgageLaneList[i].InterestBottomLimit + "%" + "</td>";
+        content += "<td style='width: 80px;  text-align:center;'>" + FormatSum(mortgageLaneList[i].Sum) + "</td>";
         content += "<td style='width: 80px;  text-align:center;'>" + mortgageLaneList[i].Duration + "</td>";
-        content += "<td style='width: 80px;  text-align:center;'>" + mortgageLaneList[i].TotalSumToReturn + "</td>";
-        content += "<td style='width: 80px;  text-align:center;'>" + mortgageLaneList[i].MonthlyPayment + "</td>";
+        content += "<td style='width: 80px;  text-align:center;'>" + FormatSum(mortgageLaneList[i].TotalSumToReturn) + "</td>";
+        content += "<td style='width: 80px;  text-align:center;'>" + FormatSum(mortgageLaneList[i].MonthlyPayment) + "</td>";
         content += "</tr>";
     }
     content += "</table>"
 
     //Add table summary
-    content += "<table style='margin-right:10px;'>"
+    content += "<table style='margin-right:10px; border-top: 2px solid black'>"
     content += "<tr>";
     content += "<th style='width:110px; text-align:right;' ></th>";
     content += "<th style='width:110px; text-align:center;' ></th>";
-    content += "<th style='width:110px; text-align:center;' >" + mortgageLaneList.sum("Sum") + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + FormatSum(mortgageLaneList.sum("Sum")) + "</th>";
     content += "<th style='width:110px; text-align:center;' ></th>";
-    content += "<th style='width:110px; text-align:center;' >" + mortgageLaneList.sum("TotalSumToReturn") + "</th>";
-    content += "<th style='width:110px; text-align:center;' >" + mortgageLaneList.sum("MonthlyPayment") + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + FormatSum( mortgageLaneList.sum("TotalSumToReturn")) + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + FormatSum(mortgageLaneList.sum("MonthlyPayment")) + "</th>";
     content += "</tr>";
     content += "</table>"
+
+    //Add summary
+    headLine = 'סיכום תמהיל';
+    content += "<h4 dir='RTL' style='text-align:center;'>" + headLine + "</h4>"
+
 
     $(parnetDiv).append(content); 
     $(parnetDiv).height($(parnetDiv).height() + addedHeightToDivParnet); 
