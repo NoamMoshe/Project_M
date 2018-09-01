@@ -15,9 +15,15 @@ function MortgageTamhilVM (_marketStateMgr, _mortgageTamhilModel){
 MortgageTamhilVM.prototype.RefreshUI = function(){
     console.log('Client DEBUG::MortgageTamhilVM::RefreshUI START');
 
-    //this.generateHeadLineViewsUI();
-    //this.generateFinancialInsightsUI();
+    this.generateHeadLineViewsUI();
+    this.generateFinancialInsightsUI();
     this.generateMortgageTamhilUI();
+
+    var content = "<p dir='RTL'>" + TEXTS.TAMHIL.DISCLAIMER + "</p>";
+    var parnetDiv = '#DisclaimerView';
+    $(parnetDiv).append(content); 
+    $(parnetDiv).height(70); 
+    
 
     console.log('Client DEBUG::MortgageTamhilVM::    RefreshUI mortgage lanes'); 
 };
@@ -25,7 +31,7 @@ MortgageTamhilVM.prototype.RefreshUI = function(){
 MortgageTamhilVM.prototype.generateHeadLineViewsUI = function(){
     
     var parnetDiv = '#HeadLineView';
-    var headLine = 'ניתוח משכנתא';
+    var headLine = TEXTS.TAMHIL.TAMHIL_ANALYSIS_HAEDLINE;
     var DELIMITER = '  -  ';   
     var addedHeightToDivParnet = 45; //For headline
     var info = this.Model.LoanTakersInfo.PersonalInfo;
@@ -54,54 +60,28 @@ MortgageTamhilVM.prototype.generateFinancialInsightsUI = function(){
 MortgageTamhilVM.prototype.generateMortgageTamhilUI = function(){
     
     var parnetDiv = '#MortgageTamhilView';
-    var headLine = 'תמהיל משכנתא';
+    var headLine = TEXTS.TAMHIL.TAMHIL_HAEDLINE;
     var addedHeightToDivParnet = 400; //For headline 
     var content = "<h4 dir='RTL' style='margin-right:10px;'>" + headLine + "</h4>"
 
-    //Add table
-    content += "<table style='margin-right:10px;'>"
-    
-    //Add headline
-    content += "<tr style='border-bottom: 2px solid black'>";
-    content += "<th style='width:110px; text-align:right;' >"  + TEXTS.TAMHIL.LINE + "</th>";
-    content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.INTERESTS + "</th>";
-    content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.SUM + "</th>";
-    content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.YEARS + "</th>";
-    content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.SUMֹֹ_TO_RETURN + "</th>";
-    content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.MONTHLY_RETURN + "</th>";
-    content += "</tr>";
-    
-    //Add table line
-    var mortgageLaneList = this.Model.MortgageLanesInfo.MortgageLaneList;
-    for(i=0 ; i<mortgageLaneList.length ; ++i)
-    {
-        content += "<tr style='border-top: 1px solid black'>"
-        content += "<td style='width: 100px; text-align:right;'>"  + mortgageLaneList[i].MortgageLaneUniqueData.Name + "</td>";
-        content += "<td style='width: 60px;  text-align:center;'>" + mortgageLaneList[i].InterestTopLimit + "% - " + mortgageLaneList[i].InterestBottomLimit + "%" + "</td>";
-        content += "<td style='width: 80px;  text-align:center;'>" + this.formatValueToNis(mortgageLaneList[i].Sum) + "</td>";
-        content += "<td style='width: 80px;  text-align:center;'>" + mortgageLaneList[i].Duration + "</td>";
-        content += "<td style='width: 80px;  text-align:center;'>" + this.formatValueToNis(mortgageLaneList[i].TotalSumToReturn) + "</td>";
-        content += "<td style='width: 80px;  text-align:center;'>" + this.formatValueToNis(mortgageLaneList[i].MonthlyPayment) + "</td>";
-        content += "</tr>";
-    }
-    content += "</table>"
+     //Add Tamhil table   
+    content += this.generateTamhilTableStr();
 
-    //Add table summary
-    content += "<table style='margin-right:10px; border-top: 2px solid black'>"
-    content += "<tr>";
-    content += "<th style='width:110px; text-align:right;' ></th>";
-    content += "<th style='width:110px; text-align:center;' ></th>";
-    content += "<th style='width:110px; text-align:center;' >" + this.formatValueToNis(mortgageLaneList.SumPropertyByName("Sum")) + "</th>";
-    content += "<th style='width:110px; text-align:center;' ></th>";
-    content += "<th style='width:110px; text-align:center;' >" + this.formatValueToNis( mortgageLaneList.SumPropertyByName("TotalSumToReturn")) + "</th>";
-    content += "<th style='width:110px; text-align:center;' >" + this.formatValueToNis(mortgageLaneList.SumPropertyByName("MonthlyPayment")) + "</th>";
-    content += "</tr>";
-    content += "</table>"
+    //Add Tamhil summary
+    headLine = TEXTS.TAMHIL.TAMHIL_SUMMARY_HAEDLINE;
+    content += "<h4 dir='RTL' style='margin-right:50px;'>" + headLine + "</h4>"
+    content += "<ul>"
+    content += "<li class='General'>" + 'TODO 1' + "</li>";
+    content += "<li class='General'>" + 'TODO 2' + "</li>";   
+    content += "</ul>"
 
-    //Add summary
-    headLine = 'סיכום תמהיל';
-    content += "<h4 dir='RTL' style='text-align:center;'>" + headLine + "</h4>"
-
+    //Add Tamhil assumptions
+    headLine = TEXTS.TAMHIL.TAMHIL_ASSUMPTIONS_HAEDLINE;
+    content += "<h4 dir='RTL' style='margin-right:50px;'>" + headLine + "</h4>"
+    content += "<ul>"
+    content += "<li class='General'>" + 'TODO 3' + "</li>";
+    content += "<li class='General'>" + 'TODO 4' + "</li>";
+    content += "</ul>"
 
     $(parnetDiv).append(content); 
     $(parnetDiv).height($(parnetDiv).height() + addedHeightToDivParnet); 
@@ -115,7 +95,7 @@ MortgageTamhilVM.prototype.generateDynamicList = function(_headLine, _list, _par
         var addedHeightToDivParnet = 40; //For headline 
         var content = "<h4 dir='RTL' style='margin-right:10px;'>" + _headLine + "</h4><ul>"
          
-        for(i=0 ; i < _list.length ; ++i)
+        for(var i=0, MAX = _list.length ; i < MAX ; ++i)
         {
             content += "<li class='" + _bulletStyle + "'>" + _list[i] + "</li>";
             addedHeightToDivParnet += 20;
@@ -148,6 +128,50 @@ MortgageTamhilVM.prototype.formatValueToNis = function (_nStr) {
 
     return x1 + x2 + " ₪";
 }
+
+MortgageTamhilVM.prototype.generateTamhilTableStr = function(){
+    //Add table
+    var content = "<table style='margin-right:50px;'>";
+        
+    //Add headline
+    content += "<tr style='border-bottom: 2px solid black'>";
+    content += "<th style='width:110px; text-align:right;' >"  + TEXTS.TAMHIL.LINE + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.INTERESTS + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.SUM + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.YEARS + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.SUMֹֹ_TO_RETURN + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + TEXTS.TAMHIL.MONTHLY_RETURN + "</th>";
+    content += "</tr>";
+
+    //Add table line
+    var mortgageLaneList = this.Model.MortgageLanesInfo.MortgageLaneList;
+    for(i=0 ; i<mortgageLaneList.length ; ++i)
+    {
+        content += "<tr style='border-top: 1px solid black'>";
+        content += "<td style='width: 100px; text-align:right;'>"  + mortgageLaneList[i].MortgageLaneUniqueData.Name + "</td>";
+        content += "<td style='width: 60px;  text-align:center;'>" + mortgageLaneList[i].InterestTopLimit + "% - " + mortgageLaneList[i].InterestBottomLimit + "%" + "</td>";
+        content += "<td style='width: 80px;  text-align:center;'>" + this.formatValueToNis(mortgageLaneList[i].Sum) + "</td>";
+        content += "<td style='width: 80px;  text-align:center;'>" + mortgageLaneList[i].Duration + "</td>";
+        content += "<td style='width: 80px;  text-align:center;'>" + this.formatValueToNis(mortgageLaneList[i].TotalSumToReturn) + "</td>";
+        content += "<td style='width: 80px;  text-align:center;'>" + this.formatValueToNis(mortgageLaneList[i].MonthlyPayment) + "</td>";
+        content += "</tr>";
+    }
+    content += "</table>";
+
+    //Add table summary
+    content += "<table style='margin-right:50px; border-top: 2px solid black'>";
+    content += "<tr>";
+    content += "<th style='width:110px; text-align:right;' ></th>";
+    content += "<th style='width:110px; text-align:center;' ></th>";
+    content += "<th style='width:110px; text-align:center;' >" + this.formatValueToNis(mortgageLaneList.SumPropertyByName("Sum")) + "</th>";
+    content += "<th style='width:110px; text-align:center;' ></th>";
+    content += "<th style='width:110px; text-align:center;' >" + this.formatValueToNis( mortgageLaneList.SumPropertyByName("TotalSumToReturn")) + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + this.formatValueToNis(mortgageLaneList.SumPropertyByName("MonthlyPayment")) + "</th>";
+    content += "</tr>";
+    content += "</table>";
+
+    return content;
+};
 
 
 // *********************************************** MarketStateManager class

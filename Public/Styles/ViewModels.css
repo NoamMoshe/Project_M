@@ -38,3 +38,14 @@ li.Attention::before {
   content: "• ";
   color: yellow;
 }
+
+li.General {
+  width:90%; 
+  padding-left: 1em; 
+  text-indent: 40px;
+}
+
+li.General::before {
+  content: "• ";
+  color: black;
+}
