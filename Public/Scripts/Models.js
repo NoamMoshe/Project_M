@@ -4,6 +4,9 @@
 // *********************************************** MortgageLaneUniqueData class
 // This entity represent 
 
+/*
+ * Ctor
+ */
 function MortgageLaneUniqueData(_name, _saving, _risk, _flexibility,_negativeList,_positiveList ) { 
 
     this.Name = _name;                                 //STRING, name of lane
@@ -18,6 +21,9 @@ function MortgageLaneUniqueData(_name, _saving, _risk, _flexibility,_negativeLis
 // *********************************************** MortgageLane class
 // This entity represent 
 
+/*
+ * Ctor
+ */
 function MortgageLane(_mortgageLaneUniqueData) { 
     
     this.Sum = 100000;                    //UINT, in NIS, sum of money loaned from the bank in this lane
@@ -35,14 +41,17 @@ function MortgageLane(_mortgageLaneUniqueData) {
 // *********************************************** MortgageLanesInfoModel class
 // This entity represent 
 
+/*
+ * Ctor
+ */
 function MortgageLanesInfoModel(_name) { 
     
     this.MortgageLaneList = [];
 };
  
-//
-// Insert dummy values to MortgageLanesInfoModel object
-//
+/*
+ * Insert dummy values to MortgageLanesInfoModel object
+ */
 MortgageLanesInfoModel.prototype.setDummyValuesDEBUG = function(){
 
     var uniqueData;
@@ -60,9 +69,13 @@ MortgageLanesInfoModel.prototype.setDummyValuesDEBUG = function(){
     this.MortgageLaneList.push(MistanaKol5LoZmoda);
 }
 
+
 // *********************************************** LoanTakersInfoModel class
 // This entity represent 
 
+/*
+ * Ctor
+ */
 function LoanTakersInfoModel() { 
 
     this.PersonalInfo  = {
@@ -94,9 +107,9 @@ function LoanTakersInfoModel() {
     };
 }
 
-//
-// Insert dummy values to LoanTakersInfoModel object
-//
+/*
+ * Insert dummy values to LoanTakersInfoModel object
+ */
 LoanTakersInfoModel.prototype.setDummyValuesDEBUG = function(){
     this.PersonalInfo.FirstName = "ישראל";
     this.PersonalInfo.LastName = "ישראלי";
@@ -121,6 +134,9 @@ LoanTakersInfoModel.prototype.setDummyValuesDEBUG = function(){
 // *********************************************** MortgageTamhilModel class
 // This entity represent all the data & Meta data about the loan
 
+/*
+ * Ctor
+ */
 function MortgageTamhilModel() {
     this.FinancialInsights = { 'NegativeList' : [], 'PositiveList' : [], 'AttentionList': [] };
 
@@ -128,9 +144,9 @@ function MortgageTamhilModel() {
     this.MortgageLanesInfo = new MortgageLanesInfoModel(); 
 }
 
-//
-// Insert dummy values to MortgageTamhilModel object
-//
+/*
+ * Insert dummy values to MortgageTamhilModel object
+ */
 MortgageTamhilModel.prototype.setDummyValuesDEBUG = function(){
 
     var personalNote = "בלה בלה בלה";

@@ -1,29 +1,12 @@
 // *********************************************
 // *****  View Models classes
 
-Array.prototype.sum = function (prop) {
-    var total = 0
-    for ( var i = 0, _len = this.length; i < _len; i++ ) {
-        total += this[i][prop]
-    }
-    return total
-}
-
-function FormatSum(nStr) {
-    nStr += '';
-    var x = nStr.split('.');
-    var x1 = x[0];
-    var x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-    while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1' + ',' + '$2');
-    }
-    return x1 + x2 + " ₪";
-}
-
 // *********************************************** MortgageTamhilModel class
 // This entity represent
 
+/*
+ * Ctor
+ */
 function MortgageTamhilVM (_marketStateMgr, _mortgageTamhilModel){
     this.Model = JSON.parse(JSON.stringify(_mortgageTamhilModel)); //Hard copy of model
     this.MarketStateMgr = JSON.parse(JSON.stringify(_marketStateMgr)); //Hard copy of model object
@@ -95,10 +78,10 @@ MortgageTamhilVM.prototype.generateMortgageTamhilUI = function(){
         content += "<tr style='border-top: 1px solid black'>"
         content += "<td style='width: 100px; text-align:right;'>"  + mortgageLaneList[i].MortgageLaneUniqueData.Name + "</td>";
         content += "<td style='width: 60px;  text-align:center;'>" + mortgageLaneList[i].InterestTopLimit + "% - " + mortgageLaneList[i].InterestBottomLimit + "%" + "</td>";
-        content += "<td style='width: 80px;  text-align:center;'>" + FormatSum(mortgageLaneList[i].Sum) + "</td>";
+        content += "<td style='width: 80px;  text-align:center;'>" + this.formatValueToNis(mortgageLaneList[i].Sum) + "</td>";
         content += "<td style='width: 80px;  text-align:center;'>" + mortgageLaneList[i].Duration + "</td>";
-        content += "<td style='width: 80px;  text-align:center;'>" + FormatSum(mortgageLaneList[i].TotalSumToReturn) + "</td>";
-        content += "<td style='width: 80px;  text-align:center;'>" + FormatSum(mortgageLaneList[i].MonthlyPayment) + "</td>";
+        content += "<td style='width: 80px;  text-align:center;'>" + this.formatValueToNis(mortgageLaneList[i].TotalSumToReturn) + "</td>";
+        content += "<td style='width: 80px;  text-align:center;'>" + this.formatValueToNis(mortgageLaneList[i].MonthlyPayment) + "</td>";
         content += "</tr>";
     }
     content += "</table>"
@@ -108,10 +91,10 @@ MortgageTamhilVM.prototype.generateMortgageTamhilUI = function(){
     content += "<tr>";
     content += "<th style='width:110px; text-align:right;' ></th>";
     content += "<th style='width:110px; text-align:center;' ></th>";
-    content += "<th style='width:110px; text-align:center;' >" + FormatSum(mortgageLaneList.sum("Sum")) + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + this.formatValueToNis(mortgageLaneList.SumPropertyByName("Sum")) + "</th>";
     content += "<th style='width:110px; text-align:center;' ></th>";
-    content += "<th style='width:110px; text-align:center;' >" + FormatSum( mortgageLaneList.sum("TotalSumToReturn")) + "</th>";
-    content += "<th style='width:110px; text-align:center;' >" + FormatSum(mortgageLaneList.sum("MonthlyPayment")) + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + this.formatValueToNis( mortgageLaneList.SumPropertyByName("TotalSumToReturn")) + "</th>";
+    content += "<th style='width:110px; text-align:center;' >" + this.formatValueToNis(mortgageLaneList.SumPropertyByName("MonthlyPayment")) + "</th>";
     content += "</tr>";
     content += "</table>"
 
@@ -144,10 +127,35 @@ MortgageTamhilVM.prototype.generateDynamicList = function(_headLine, _list, _par
     }
 };
 
+/*
+ * Added support to Array. Sum up and return a property of an object held in an array.
+ * 
+ * Example:
+ *   formatValueToNis(1300000) -> return "₪ 1,300,000"
+ * 
+ * Retrun value: 
+ *   A formatted string of the input integer
+ */
+MortgageTamhilVM.prototype.formatValueToNis = function (_nStr) {
+    _nStr += '';
+    var x = _nStr.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+
+    while (rgx.test(x1)) 
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+
+    return x1 + x2 + " ₪";
+}
+
 
 // *********************************************** MarketStateManager class
 // This entity represent
 
+/*
+ * Ctor
+ */
 function MarketStateManager (){
     this.CurrPrimeRate = 1.5 + 0.1;    
     this.ExpectedPrimeRateIn1Year = 1.5 + 0.25;
