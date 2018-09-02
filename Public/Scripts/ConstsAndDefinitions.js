@@ -2,6 +2,7 @@
 // ***** Consts, Enums and defines
 
 var Enums = {
+    'VERSION': '0.0.1',
     'LoanTakers' : {
         'ERR': 0,        
         'SOLE': 1,      
