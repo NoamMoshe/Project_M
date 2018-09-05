@@ -9,6 +9,11 @@ const PATH_TO_NODE_MODULES = (process.platform == 'win32') ? "C:/Windows/System3
 var express = require(PATH_TO_NODE_MODULES + 'express');
 var path = require('path');
 
+var app = express();
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'Private/Jade'));
+app.set('view engine','jade');
+
 if (process.platform == 'win32') {
     app.use(express.bodyParser());
 }
@@ -17,10 +22,6 @@ else {
     app.use(bodyParser());
 }
 
-var app = express();
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'Private/Jade'));
-app.set('view engine','jade');
 app.use(express.static(path.join(__dirname, 'Public')));
 
 var DataBase = require('./Private/DB/DataBase.js');
