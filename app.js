@@ -9,8 +9,15 @@ const PATH_TO_NODE_MODULES = (process.platform == 'win32') ? "C:/Windows/System3
 var express = require(PATH_TO_NODE_MODULES + 'express');
 var path = require('path');
 
+if (process.platform == 'win32') {
+    app.use(express.bodyParser());
+}
+else {
+    var bodyParser = require('body-parser');
+    app.use(bodyParser());
+}
+
 var app = express();
-app.use(express.bodyParser());
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'Private/Jade'));
 app.set('view engine','jade');
