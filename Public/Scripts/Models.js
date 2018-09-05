@@ -31,6 +31,8 @@ function MortgageLane(_mortgageLaneUniqueData) {
     this.InterestTopLimit = 4.0;          //FLOOT, in percentage,
     this.InterestBottomLimit = 1.0;       //FLOOT, in percentage
     this.TotalSumToReturn = 150000;       //UINT, in NIS, total sum of money returned the bank in this lane
+    this.TotalHzmadaSum = 75000;          //UINT, in NIS, total sum of money returned due to Hzmada
+    this.TotalInterestSum = 75000;        //UINT, in NIS, total sum of money returned due to Interest
     this.MonthlyPayment = 4000;           //UINT, in NIS
     this.WorstCaseMonthlyPayment = 4000;  //UINT, in NIS 
 

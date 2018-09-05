@@ -12,6 +12,9 @@ function MortgageTamhilVM (_marketStateMgr, _mortgageTamhilModel){
     this.MarketStateMgr = JSON.parse(JSON.stringify(_marketStateMgr)); //Hard copy of model object
 }
 
+/*
+ * Load/Refresh the calculated Tamil results
+ */
 MortgageTamhilVM.prototype.RefreshUI = function(){
     console.log('Client DEBUG::MortgageTamhilVM::RefreshUI START');
 
@@ -71,8 +74,8 @@ MortgageTamhilVM.prototype.generateMortgageTamhilUI = function(){
     headLine = TEXTS.TAMHIL.TAMHIL_SUMMARY_HAEDLINE;
     content += "<h4 dir='RTL' style='margin-right:50px;'>" + headLine + "</h4>"
     content += "<ul>"
-    content += "<li class='General'>" + 'TODO 1' + "</li>";
-    content += "<li class='General'>" + 'TODO 2' + "</li>";   
+    content += "<li class='General'>" + this.generateTamhilSummary1() + "</li>";
+    content += "<li class='General'>" + this.generateTamhilSummary2() + "</li>";   
     content += "</ul>"
 
     //Add Tamhil assumptions
@@ -172,6 +175,34 @@ MortgageTamhilVM.prototype.generateTamhilTableStr = function(){
 
     return content;
 };
+
+MortgageTamhilVM.prototype.generateTamhilSummary1 = function()
+{
+    var s1 = ' על ';
+    var s2 = ' עם החזר חודשי של ';   
+    var s3 = ' תחזירו ';   
+
+    var mortgageLaneList = this.Model.MortgageLanesInfo.MortgageLaneList;
+    return s1 + this.formatValueToNis(mortgageLaneList.SumPropertyByName("Sum")) + 
+           s2 + this.formatValueToNis(mortgageLaneList.SumPropertyByName("MonthlyPayment")) + 
+           s3 + this.formatValueToNis(mortgageLaneList.SumPropertyByName("TotalSumToReturn"));
+}
+
+MortgageTamhilVM.prototype.generateTamhilSummary2 = function()
+{
+    var s1 = ' מתוך ה ';
+    var s2 = ' שתחזירו לבנק ';    
+    var s3 = ' הם עבור הריבית ';  
+    var s4 = ' הם עבור ההצמדה ';  
+    
+    var mortgageLaneList = this.Model.MortgageLanesInfo.MortgageLaneList;
+    var onlysum = this.formatValueToNis( parseInt(mortgageLaneList.SumPropertyByName("TotalSumToReturn")) - parseInt(mortgageLaneList.SumPropertyByName("Sum")));
+   
+    return s1 + onlysum + 
+           s2 + this.formatValueToNis(mortgageLaneList.SumPropertyByName("TotalInterestSum")) +
+           s3 + this.formatValueToNis(mortgageLaneList.SumPropertyByName("TotalHzmadaSum")) +
+           s4;
+}
 
 
 // *********************************************** MarketStateManager class
