@@ -2,50 +2,20 @@
  * Financial Insights styles
  */
 
-ul {
-  list-style: none;
-}
+ul { list-style: none; }
 
-li.Positive {
-   width:90%; 
-   padding-left: 1em; 
-   text-indent: -.7em;
-}
+li.Positive         { width:90%; padding-left: 1em; text-indent: -.7em; }
+li.Positive::before { content: "• "; color: green; }
 
-li.Positive::before {
-  content: "• ";
-  color: green;
-}
+li.Negative { width:90%; padding-left: 1em; text-indent: -.7em; }
+li.Negative::before { content: "• "; color: red; }
 
-li.Negative {
-  width:90%; 
-  padding-left: 1em; 
-  text-indent: -.7em;
-}
+li.Attention { width:90%; padding-left: 1em; text-indent: -.7em; }
+li.Attention::before { content: "• "; color: yellow; }
 
-li.Negative::before {
-  content: "• ";
-  color: red;
-}
+li.General { width:90%; padding-left: 1em; text-indent: 40px; }
+li.General::before { content: "• "; color: black; }
 
-li.Attention {
-  width:90%; 
-  padding-left: 1em; 
-  text-indent: -.7em;
-}
+li.Info { width:90%; padding-left: 1em; text-indent: 40px; text-decoration: underline; cursor: pointer; }
+li.Info::before { content: "• "; color: black; }
 
-li.Attention::before {
-  content: "• ";
-  color: yellow;
-}
-
-li.General {
-  width:90%; 
-  padding-left: 1em; 
-  text-indent: 40px;
-}
-
-li.General::before {
-  content: "• ";
-  color: black;
-}

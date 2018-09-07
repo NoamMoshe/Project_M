@@ -66,6 +66,7 @@ const TEXTS = Object.freeze( {
         'TAMHIL_ANALYSIS_HAEDLINE': 'ניתוח משכנתא',  
         'TAMHIL_SUMMARY_HAEDLINE': 'סיכום תמהיל', 
         'TAMHIL_ASSUMPTIONS_HAEDLINE': 'הנחות בתמהיל', 
+        'TAMHIL_EXTRAֹINFO_HAEDLINE': 'מידע נוסף', 
     },
 })
 

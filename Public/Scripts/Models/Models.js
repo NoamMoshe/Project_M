@@ -34,7 +34,7 @@ function MortgageLane(_mortgageLaneUniqueData) {
     this.TotalHzmadaSum = 75000;          //UINT, in NIS, total sum of money returned due to Hzmada
     this.TotalInterestSum = 75000;        //UINT, in NIS, total sum of money returned due to Interest
     this.MonthlyPayment = 4000;           //UINT, in NIS
-    this.WorstCaseMonthlyPayment = 4000;  //UINT, in NIS 
+    this.MaxMonthlyPayment = 4666;        //UINT, in NIS 
 
     this.MortgageLaneUniqueData = _mortgageLaneUniqueData;     //Obj
 };
@@ -49,6 +49,8 @@ function MortgageLane(_mortgageLaneUniqueData) {
 function MortgageLanesInfoModel(_name) { 
     
     this.MortgageLaneList = [];
+    this.IsWithMaslolZamood = false;                //BOOL, is one of the lanes Zamod the consumer price index 
+    this.ConsumerPriceIndex = 2;                    //FLOOT, in percentage,
 };
  
 /*
@@ -65,6 +67,7 @@ MortgageLanesInfoModel.prototype.setDummyValuesDEBUG = function(){
     uniqueData = new MortgageLaneUniqueData("קבועה צמודה",3,3,1,[],[]);
     var KvoaZmoda = new MortgageLane(uniqueData);
     this.MortgageLaneList.push(KvoaZmoda);
+    this.IsWithMaslolZamood = true;
 
     uniqueData = new MortgageLaneUniqueData("משתנה צמודה כל 5",3,2,3,[],[]);  
     var MistanaKol5LoZmoda = new MortgageLane(uniqueData);
