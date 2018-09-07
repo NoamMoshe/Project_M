@@ -1,8 +1,10 @@
-// *********************************************
-// *****  View Models classes
+/* Class MortgageTamhilVM
+ * 
+ */
 
-// *********************************************** MortgageTamhilModel class
-// This entity represent
+
+/*************************************/
+/*** Public ***/
 
 /*
  * Ctor
@@ -30,6 +32,10 @@ MortgageTamhilVM.prototype.RefreshUI = function(){
 
     console.log('Client DEBUG::MortgageTamhilVM::    RefreshUI mortgage lanes'); 
 };
+
+
+/*************************************/
+/*** Private ***/
 
 MortgageTamhilVM.prototype.generateHeadLineViewsUI = function(){
     
@@ -205,22 +211,5 @@ MortgageTamhilVM.prototype.generateTamhilSummary2 = function()
 }
 
 
-// *********************************************** MarketStateManager class
-// This entity represent
 
-/*
- * Ctor
- */
-function MarketStateManager (){
-    this.CurrPrimeRate = 1.5 + 0.1;    
-    this.ExpectedPrimeRateIn1Year = 1.5 + 0.25;
-    this.ExpectedPrimeRateIn5Year = 1.5 + 2.25;
-}
-
-MarketStateManager.prototype.Analyze = function(){
-    console.log('Client DEBUG::MarketStateManager::Analyze Analyzing market');
-
-    //Analyze prime rates
-    console.log('Client DEBUG::MarketStateManager::Analyze     Analyze prime rates');
-};
 
